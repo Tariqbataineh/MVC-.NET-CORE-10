@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>University Cafeteria</title>
+
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <h2>☕ University Cafeteria</h2>
+
+            <div class="nav-links">
+                <a href="/Cafeteria/Index">Home</a>
+                <a href="/Cafeteria/Products">Products</a>
+                <a href="/Cafeteria/Suppliers">Suppliers</a>
+                <a href="/Cafeteria/SupplyStatus">Supply Status</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        @RenderBody()
+    </main>
+
+    <footer>
+        <p>© 2026 University Cafeteria | Supply Management System</p>
+    </footer>
+
+</body>
+</html>
