@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>University Cafeteria</title>
+
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+
+<body>
+
+    <header class="main-header">
+        <h1>University Cafeteria</h1>
+        <p>Supply Management System</p>
+    </header>
+
+    <nav class="main-nav">
+        <a href="/Cafeteria/Index">Home</a>
+        <a href="/Cafeteria/Products">Products</a>
+        <a href="/Cafeteria/Suppliers">Suppliers</a>
+        <a href="/Cafeteria/SupplyStatus">Supply Status</a>
+    </nav>
+
+    <main class="main-content">
+        @RenderBody()
+    </main>
+
+    <footer class="main-footer">
+        <p>© 2026 University Cafeteria</p>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
