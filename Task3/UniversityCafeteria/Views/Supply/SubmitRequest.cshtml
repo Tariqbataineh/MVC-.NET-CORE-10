@@ -1,0 +1,7 @@
+@{
+    ViewData["Title"] = "Request Result";
+    ViewData["NavTitle"] = "Request Result";
+}
+<div class="page-eyebrow"><span class="eyebrow-dot"></span> FORM VALIDATION</div>
+<div class="page-header"><div><h1 class="page-title">Request validation</h1><p class="page-subtitle">Review the message below and try again.</p></div></div>
+<section class="panel-card result-panel"><div class="result-symbol error-symbol">!</div><h2>Request needs attention</h2>@if (ViewBag.Error != null){<div class="validation-alert" role="alert">@ViewBag.Error</div>}<p>Please return to the form and correct the request details.</p><a asp-action="CreateRequest" class="primary-button">Back to request form <span>↗</span></a></section>

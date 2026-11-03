@@ -1,0 +1,11 @@
+@{
+    ViewData["Title"] = "About";
+    ViewData["NavTitle"] = "About";
+}
+<div class="page-eyebrow"><span class="eyebrow-dot"></span> ABOUT THE PLATFORM</div>
+<div class="page-header"><div><h1 class="page-title">Built for better supply management.</h1><p class="page-subtitle">A simple university cafeteria supply management experience.</p></div><span class="header-chip">ABOUT THE SYSTEM</span></div>
+@if (TempData["Message"] is string message)
+{
+    <div class="success-alert" role="status"><span class="success-check">✓</span><div><strong>Request submitted</strong><p>@message</p></div></div>
+}
+<section class="panel-card about-panel"><div class="section-overline">OUR PURPOSE</div><h2>Orange University Cafeteria</h2><p>This ASP.NET Core MVC application demonstrates how to organize cafeteria products, suppliers, and supply requests in a single system.</p><div class="about-divider"></div><div class="about-points"><div><span>01</span><strong>Product Information</strong><p>Send product details to Razor Views with ViewData.</p></div><div><span>02</span><strong>Supplier Directory</strong><p>Pass supplier information with ViewBag.</p></div><div><span>03</span><strong>Supply Requests</strong><p>Receive forms with Request.Form and show confirmation using TempData.</p></div></div></section>

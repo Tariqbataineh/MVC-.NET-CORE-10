@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Dashboard";
+    ViewData["NavTitle"] = "Dashboard";
+    string[] categories = ViewBag.Categories;
+    string[] descriptions = { "Beverages & refreshments", "Everyday essentials", "Quick bites & treats", "Coffee & warm drinks", "Chilled beverages" };
+    string[] symbols = { "◉", "◈", "✦", "♨", "❄" };
+    int i = 0;
+}
+<div class="page-eyebrow"><span class="eyebrow-dot"></span> OPERATIONS OVERVIEW</div>
+<section class="hero"><div class="hero-content"><span class="hero-tag">WELCOME TO YOUR WORKSPACE</span><h1>Good to see you,<br /><span>Ahmad Ali.</span></h1><p>Everything you need to manage the university cafeteria in one beautiful workspace.</p><a asp-action="CreateRequest" class="hero-btn">Create supply request <span>↗</span></a></div><div class="hero-art" aria-hidden="true"><div class="hero-ring one"></div><div class="hero-ring two"></div><div class="hero-orb">✳</div></div></section>
+<div class="section-heading"><div><div class="section-overline">YOUR CATALOG</div><h2>Product categories</h2><p>Categories provided by the controller using ViewBag and displayed using foreach.</p></div><span class="section-count">05 categories</span></div>
+<div class="category-grid">
+@foreach (string category in categories)
+{
+    <article class="category-card"><div class="category-icon icon-@i">@symbols[i]</div><span class="category-number">0@(i + 1)</span><h3>@category</h3><p>@descriptions[i]</p><span class="category-arrow">↗</span></article>
+    i++;
+}
+</div>
+<div class="info-strip"><div class="info-icon">ⓘ</div><div><strong>Learning highlight — Part 4</strong><p>The <code>string[]</code> array is created inside <code>Index()</code>, passed through <code>ViewBag.Categories</code>, and rendered dynamically in the View.</p></div></div>

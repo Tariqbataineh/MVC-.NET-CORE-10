@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Products";
+    ViewData["NavTitle"] = "Products";
+    string[] products = ViewData["Products"] as string[] ?? Array.Empty<string>();
+    string[] icons = { "◉", "◍", "♨", "▱", "◆" };
+}
+<div class="page-eyebrow"><span class="eyebrow-dot"></span> PRODUCT CATALOG</div>
+<div class="page-header"><div><h1 class="page-title">@ViewData["PageTitle"]</h1><p class="page-subtitle">Browse all products available in the university cafeteria.</p></div><span class="header-chip">VIEWDATA DEMO</span></div>
+<div class="row g-4 stats-row">
+    <div class="col-md-6"><div class="metric-card card"><div class="metric-top"><span>MANAGER NAME</span><span class="metric-icon">◎</span></div><div class="metric-value metric-text">@ViewData["ManagerName"]</div><p>Responsible for cafeteria operations</p></div></div>
+    <div class="col-md-6"><div class="metric-card card"><div class="metric-top"><span>NUMBER OF PRODUCTS</span><span class="metric-icon accent">◈</span></div><div class="metric-value">@ViewData["ProductCount"]<span class="metric-suffix">items</span></div><p>Products currently listed</p></div></div>
+</div>
+<section class="panel-card"><div class="panel-top"><div><div class="section-overline">INVENTORY</div><h2>All products</h2></div><span class="soft-badge">@products.Length items</span></div><ul class="product-list">
+@for (int i = 0; i < products.Length; i++)
+{
+    <li><span class="product-icon icon-@(i % 5)">@icons[i]</span><span class="product-name">@products[i]</span><span class="product-state"><span></span> Listed</span><span class="row-chevron">›</span></li>
+}
+</ul></section>
+<div class="info-strip"><div class="info-icon">ⓘ</div><div><strong>Learning highlight — Part 2</strong><p>The controller sends the page title, manager name, product count, and products array through <code>ViewData</code>.</p></div></div>

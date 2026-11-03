@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Suppliers";
+    ViewData["NavTitle"] = "Suppliers";
+    string[] suppliers = ViewBag.Suppliers;
+    string[] abbreviations = { "FF", "HD", "DS" };
+}
+<div class="page-eyebrow"><span class="eyebrow-dot"></span> PARTNER DIRECTORY</div>
+<div class="page-header"><div><h1 class="page-title">@ViewBag.PageTitle</h1><p class="page-subtitle">Meet the partners that keep the cafeteria stocked.</p></div><span class="header-chip">VIEWBAG DEMO</span></div>
+<div class="metric-card card supplier-summary"><div class="metric-top"><span>NUMBER OF SUPPLIERS</span><span class="metric-icon">♧</span></div><div class="metric-value">@ViewBag.SupplierCount<span class="metric-suffix">partners</span></div><p>Listed cafeteria suppliers</p></div>
+<div class="section-heading suppliers-heading"><div><div class="section-overline">OUR NETWORK</div><h2>Supplier directory</h2><p>The suppliers below were passed from SupplyController using ViewBag.</p></div></div>
+<div class="supplier-grid">
+@for (int i = 0; i < suppliers.Length; i++)
+{
+    <article class="supplier-card"><div class="supplier-logo">@abbreviations[i]</div><div class="supplier-meta"><span>SUPPLIER 0@(i + 1)</span><h3>@suppliers[i]</h3><p>University cafeteria partner</p></div><span class="supplier-check">✓</span></article>
+}
+</div>
+<div class="info-strip"><div class="info-icon">ⓘ</div><div><strong>Learning highlight — Part 3</strong><p>The controller sends <code>PageTitle</code>, <code>SupplierCount</code>, and the suppliers array using <code>ViewBag</code>.</p></div></div>
