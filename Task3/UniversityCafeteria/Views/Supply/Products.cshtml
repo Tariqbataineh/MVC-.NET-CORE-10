@@ -1,19 +1,107 @@
 @{
-    ViewData["Title"] = "Products";
-    ViewData["NavTitle"] = "Products";
-    string[] products = ViewData["Products"] as string[] ?? Array.Empty<string>();
-    string[] icons = { "◉", "◍", "♨", "▱", "◆" };
+    string[] products =
+        ViewData["Products"] as string[] ?? Array.Empty<string>();
 }
-<div class="page-eyebrow"><span class="eyebrow-dot"></span> PRODUCT CATALOG</div>
-<div class="page-header"><div><h1 class="page-title">@ViewData["PageTitle"]</h1><p class="page-subtitle">Browse all products available in the university cafeteria.</p></div><span class="header-chip">VIEWDATA DEMO</span></div>
-<div class="row g-4 stats-row">
-    <div class="col-md-6"><div class="metric-card card"><div class="metric-top"><span>MANAGER NAME</span><span class="metric-icon">◎</span></div><div class="metric-value metric-text">@ViewData["ManagerName"]</div><p>Responsible for cafeteria operations</p></div></div>
-    <div class="col-md-6"><div class="metric-card card"><div class="metric-top"><span>NUMBER OF PRODUCTS</span><span class="metric-icon accent">◈</span></div><div class="metric-value">@ViewData["ProductCount"]<span class="metric-suffix">items</span></div><p>Products currently listed</p></div></div>
+
+<div class="page-header">
+
+    <div>
+        <h1>@ViewData["PageTitle"]</h1>
+
+        <p>
+            View the products available in the cafeteria catalog.
+        </p>
+    </div>
+
+    <span class="section-badge">
+        Product Catalog
+    </span>
+
 </div>
-<section class="panel-card"><div class="panel-top"><div><div class="section-overline">INVENTORY</div><h2>All products</h2></div><span class="soft-badge">@products.Length items</span></div><ul class="product-list">
-@for (int i = 0; i < products.Length; i++)
-{
-    <li><span class="product-icon icon-@(i % 5)">@icons[i]</span><span class="product-name">@products[i]</span><span class="product-state"><span></span> Listed</span><span class="row-chevron">›</span></li>
-}
-</ul></section>
-<div class="info-strip"><div class="info-icon">ⓘ</div><div><strong>Learning highlight — Part 2</strong><p>The controller sends the page title, manager name, product count, and products array through <code>ViewData</code>.</p></div></div>
+
+
+<!-- INFORMATION CARDS -->
+
+<div class="row g-4 mb-4">
+
+    <div class="col-md-6">
+
+        <div class="info-card">
+
+            <div class="info-icon green">
+                <i class="bi bi-person-badge"></i>
+            </div>
+
+            <div>
+                <span class="info-label">Cafeteria Manager</span>
+
+                <h2>@ViewData["ManagerName"]</h2>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="info-card">
+
+            <div class="info-icon blue">
+                <i class="bi bi-box-seam"></i>
+            </div>
+
+            <div>
+                <span class="info-label">Total Products</span>
+
+                <h2>@ViewData["ProductCount"]</h2>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PRODUCT LIST -->
+
+<div class="content-card">
+
+    <div class="content-card-header">
+
+        <div>
+            <h2>Products</h2>
+
+            <p>Products currently listed in the cafeteria.</p>
+        </div>
+
+        <span class="section-badge">
+            @products.Length Items
+        </span>
+
+    </div>
+
+    <div class="product-list">
+
+        @foreach (string product in products)
+        {
+            <div class="product-row">
+
+                <div class="product-row-icon">
+                    <i class="bi bi-box"></i>
+                </div>
+
+                <div class="product-row-name">
+                    @product
+                </div>
+
+                <span class="item-badge">
+                    Listed
+                </span>
+
+            </div>
+        }
+
+    </div>
+
+</div>

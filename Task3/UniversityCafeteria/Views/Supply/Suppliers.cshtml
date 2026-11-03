@@ -1,17 +1,103 @@
 @{
-    ViewData["Title"] = "Suppliers";
-    ViewData["NavTitle"] = "Suppliers";
-    string[] suppliers = ViewBag.Suppliers;
-    string[] abbreviations = { "FF", "HD", "DS" };
+    string[] suppliers =
+        ViewBag.Suppliers ?? Array.Empty<string>();
+
+    int supplierNumber = 1;
 }
-<div class="page-eyebrow"><span class="eyebrow-dot"></span> PARTNER DIRECTORY</div>
-<div class="page-header"><div><h1 class="page-title">@ViewBag.PageTitle</h1><p class="page-subtitle">Meet the partners that keep the cafeteria stocked.</p></div><span class="header-chip">VIEWBAG DEMO</span></div>
-<div class="metric-card card supplier-summary"><div class="metric-top"><span>NUMBER OF SUPPLIERS</span><span class="metric-icon">♧</span></div><div class="metric-value">@ViewBag.SupplierCount<span class="metric-suffix">partners</span></div><p>Listed cafeteria suppliers</p></div>
-<div class="section-heading suppliers-heading"><div><div class="section-overline">OUR NETWORK</div><h2>Supplier directory</h2><p>The suppliers below were passed from SupplyController using ViewBag.</p></div></div>
-<div class="supplier-grid">
-@for (int i = 0; i < suppliers.Length; i++)
-{
-    <article class="supplier-card"><div class="supplier-logo">@abbreviations[i]</div><div class="supplier-meta"><span>SUPPLIER 0@(i + 1)</span><h3>@suppliers[i]</h3><p>University cafeteria partner</p></div><span class="supplier-check">✓</span></article>
-}
+
+<div class="page-header">
+
+    <div>
+        <h1>@ViewBag.PageTitle</h1>
+
+        <p>
+            View the cafeteria supplier directory.
+        </p>
+    </div>
+
+    <span class="section-badge">
+        Supplier Directory
+    </span>
+
 </div>
-<div class="info-strip"><div class="info-icon">ⓘ</div><div><strong>Learning highlight — Part 3</strong><p>The controller sends <code>PageTitle</code>, <code>SupplierCount</code>, and the suppliers array using <code>ViewBag</code>.</p></div></div>
+
+
+<!-- SUPPLIER COUNT -->
+
+<div class="row g-4 mb-4">
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="info-card">
+
+            <div class="info-icon green">
+                <i class="bi bi-buildings"></i>
+            </div>
+
+            <div>
+                <span class="info-label">
+                    Total Suppliers
+                </span>
+
+                <h2>@ViewBag.SupplierCount</h2>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- SUPPLIER DIRECTORY -->
+
+<div class="section-header">
+
+    <div>
+        <h2>Supplier Directory</h2>
+
+        <p>
+            Companies supplying products to the cafeteria.
+        </p>
+    </div>
+
+</div>
+
+<div class="row g-4">
+
+    @foreach (string supplier in suppliers)
+    {
+        <div class="col-lg-4 col-md-6">
+
+            <div class="supplier-card">
+
+                <div class="supplier-avatar">
+                    <i class="bi bi-building"></i>
+                </div>
+
+                <span class="supplier-number">
+                    SUPPLIER @supplierNumber.ToString("D2")
+                </span>
+
+                <h3>@supplier</h3>
+
+                <p>
+                    Cafeteria Supplier
+                </p>
+
+                <div class="supplier-footer">
+
+                    <span>Supplier Directory</span>
+
+                    <i class="bi bi-check-circle"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        supplierNumber++;
+    }
+
+</div>

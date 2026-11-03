@@ -1,13 +1,230 @@
-@{
-    ViewData["Title"] = "Create Request";
-    ViewData["NavTitle"] = "Create Request";
-}
-<div class="page-eyebrow"><span class="eyebrow-dot"></span> PROCUREMENT</div>
-<div class="page-header"><div><h1 class="page-title">Create a supply request</h1><p class="page-subtitle">Fill out the details below to request cafeteria products.</p></div><span class="header-chip">GET + POST DEMO</span></div>
-<div class="form-layout"><section class="panel-card form-panel"><div class="panel-top"><div><div class="section-overline">NEW REQUEST</div><h2>Request details</h2><p class="form-intro">All fields must be completed before submission.</p></div><span class="form-step">01 / 01</span></div>
-<form asp-controller="Supply" asp-action="SubmitRequest" method="post">
-    <div class="field"><label for="EmployeeName">Employee Name <span>*</span></label><input class="form-control" id="EmployeeName" name="EmployeeName" type="text" placeholder="e.g. Ahmad Ali" autocomplete="name" /><small>Employee submitting the supply request</small></div>
-    <div class="field"><label for="ProductName">Product Name <span>*</span></label><select class="form-select" id="ProductName" name="ProductName" required><option value="">Choose a product</option><option>Water</option><option>Orange Juice</option><option>Coffee</option><option>Sandwich</option><option>Chocolate</option></select></div>
-    <div class="field-row"><div class="field"><label for="Quantity">Quantity <span>*</span></label><input class="form-control" id="Quantity" name="Quantity" type="number" min="1" step="1" required placeholder="e.g. 20" /></div><div class="field"><label for="RequiredDate">Required Date <span>*</span></label><input class="form-control" id="RequiredDate" name="RequiredDate" type="date" required /></div></div>
-    <div class="form-actions"><span>✳ &nbsp;Please verify your request details.</span><button class="primary-button" type="submit">Submit request <span>↗</span></button></div>
-</form></section><aside class="form-side"><div class="tip-card"><span class="tip-mark">✦</span><h3>Before you submit</h3><p>Your request is handled using an HTTP POST and <code>Request.Form</code> in the controller.</p><div class="tip-divider"></div><p>For this classroom exercise, requests are validated but <strong>not saved to a database</strong>.</p></div><div class="mini-note"><strong>How it works</strong><span>GET → Show form</span><span>POST → Read submitted values</span><span>Redirect → About page</span></div></aside></div>
+<div class="page-header">
+
+    <div>
+        <h1>Create Supply Request</h1>
+
+        <p>
+            Complete the form to submit a new cafeteria supply request.
+        </p>
+    </div>
+
+</div>
+
+
+<div class="row g-4">
+
+    <!-- REQUEST FORM -->
+
+    <div class="col-lg-8">
+
+        <div class="content-card">
+
+            <div class="content-card-header">
+
+                <div>
+                    <h2>Request Details</h2>
+
+                    <p>
+                        Enter the required supply information.
+                    </p>
+                </div>
+
+                <div class="form-header-icon">
+                    <i class="bi bi-file-earmark-text"></i>
+                </div>
+
+            </div>
+
+            <form asp-controller="Supply"
+                  asp-action="SubmitRequest"
+                  method="post"
+                  class="request-form">
+
+                @Html.AntiForgeryToken()
+
+                <!-- EMPLOYEE NAME -->
+
+                <div class="form-group">
+
+                    <label for="EmployeeName">
+                        Employee Name
+                        <span class="required-mark">*</span>
+                    </label>
+
+                    <input type="text"
+                           id="EmployeeName"
+                           name="EmployeeName"
+                           class="form-control"
+                           placeholder="Enter employee name" />
+
+                </div>
+
+
+                <!-- PRODUCT NAME -->
+
+                <div class="form-group">
+
+                    <label for="ProductName">
+                        Product Name
+                        <span class="required-mark">*</span>
+                    </label>
+
+                    <select id="ProductName"
+                            name="ProductName"
+                            class="form-select"
+                            required>
+
+                        <option value="">
+                            Select a product
+                        </option>
+
+                        <option value="Water">Water</option>
+
+                        <option value="Orange Juice">
+                            Orange Juice
+                        </option>
+
+                        <option value="Coffee">Coffee</option>
+
+                        <option value="Sandwich">Sandwich</option>
+
+                        <option value="Chocolate">Chocolate</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- QUANTITY AND DATE -->
+
+                <div class="row g-4">
+
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+
+                            <label for="Quantity">
+                                Quantity
+                                <span class="required-mark">*</span>
+                            </label>
+
+                            <input type="number"
+                                   id="Quantity"
+                                   name="Quantity"
+                                   class="form-control"
+                                   min="1"
+                                   step="1"
+                                   placeholder="Enter quantity"
+                                   required />
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+
+                            <label for="RequiredDate">
+                                Required Date
+                                <span class="required-mark">*</span>
+                            </label>
+
+                            <input type="date"
+                                   id="RequiredDate"
+                                   name="RequiredDate"
+                                   class="form-control"
+                                   required />
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="form-actions">
+
+                    <a asp-action="Index"
+                       class="secondary-btn">
+
+                        Cancel
+
+                    </a>
+
+                    <button type="submit"
+                            class="primary-btn">
+
+                        <i class="bi bi-send"></i>
+
+                        Submit Request
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- INFORMATION PANEL -->
+
+    <div class="col-lg-4">
+
+        <div class="request-info-card">
+
+            <div class="request-info-icon">
+                <i class="bi bi-clipboard-check"></i>
+            </div>
+
+            <h3>Request Information</h3>
+
+            <p>
+                Please review the information before
+                submitting your supply request.
+            </p>
+
+            <div class="request-info-divider"></div>
+
+            <div class="request-info-item">
+
+                <i class="bi bi-check-circle"></i>
+
+                <span>Enter the employee name</span>
+
+            </div>
+
+            <div class="request-info-item">
+
+                <i class="bi bi-check-circle"></i>
+
+                <span>Select a product</span>
+
+            </div>
+
+            <div class="request-info-item">
+
+                <i class="bi bi-check-circle"></i>
+
+                <span>Specify the required quantity</span>
+
+            </div>
+
+            <div class="request-info-item">
+
+                <i class="bi bi-check-circle"></i>
+
+                <span>Choose the required date</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

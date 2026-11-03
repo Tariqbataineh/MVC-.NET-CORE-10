@@ -1,19 +1,219 @@
 @{
-    ViewData["Title"] = "Dashboard";
-    ViewData["NavTitle"] = "Dashboard";
-    string[] categories = ViewBag.Categories;
-    string[] descriptions = { "Beverages & refreshments", "Everyday essentials", "Quick bites & treats", "Coffee & warm drinks", "Chilled beverages" };
-    string[] symbols = { "◉", "◈", "✦", "♨", "❄" };
-    int i = 0;
+    string[] categories = ViewBag.Categories ?? Array.Empty<string>();
+
+    string[] icons =
+    {
+        "bi-cup-straw",
+        "bi-egg-fried",
+        "bi-bag",
+        "bi-cup-hot",
+        "bi-snow"
+    };
+
+    string[] descriptions =
+    {
+        "Beverages and refreshments",
+        "Meals and food products",
+        "Snacks and quick bites",
+        "Coffee, tea and warm beverages",
+        "Chilled drinks and refreshments"
+    };
+
+    int index = 0;
 }
-<div class="page-eyebrow"><span class="eyebrow-dot"></span> OPERATIONS OVERVIEW</div>
-<section class="hero"><div class="hero-content"><span class="hero-tag">WELCOME TO YOUR WORKSPACE</span><h1>Good to see you,<br /><span>Ahmad Ali.</span></h1><p>Everything you need to manage the university cafeteria in one beautiful workspace.</p><a asp-action="CreateRequest" class="hero-btn">Create supply request <span>↗</span></a></div><div class="hero-art" aria-hidden="true"><div class="hero-ring one"></div><div class="hero-ring two"></div><div class="hero-orb">✳</div></div></section>
-<div class="section-heading"><div><div class="section-overline">YOUR CATALOG</div><h2>Product categories</h2><p>Categories provided by the controller using ViewBag and displayed using foreach.</p></div><span class="section-count">05 categories</span></div>
-<div class="category-grid">
-@foreach (string category in categories)
-{
-    <article class="category-card"><div class="category-icon icon-@i">@symbols[i]</div><span class="category-number">0@(i + 1)</span><h3>@category</h3><p>@descriptions[i]</p><span class="category-arrow">↗</span></article>
-    i++;
-}
+
+<!-- PAGE HEADER -->
+
+<div class="page-header">
+
+    <div>
+        <h1>Dashboard</h1>
+
+        <p>
+            Manage cafeteria supplies and product information.
+        </p>
+    </div>
+
+    <a asp-controller="Supply"
+       asp-action="CreateRequest"
+       class="primary-btn">
+
+        <i class="bi bi-plus-lg"></i>
+        New Supply Request
+
+    </a>
+
 </div>
-<div class="info-strip"><div class="info-icon">ⓘ</div><div><strong>Learning highlight — Part 4</strong><p>The <code>string[]</code> array is created inside <code>Index()</code>, passed through <code>ViewBag.Categories</code>, and rendered dynamically in the View.</p></div></div>
+
+
+<!-- WELCOME BANNER -->
+
+<div class="welcome-banner">
+
+    <div class="welcome-content">
+
+        <span class="welcome-label">
+            CAFETERIA MANAGEMENT
+        </span>
+
+        <h2>Welcome to Orange University</h2>
+
+        <p>
+            Manage your products, suppliers, and supply
+            requests from one centralized platform.
+        </p>
+
+        <a asp-controller="Supply"
+           asp-action="Products"
+           class="welcome-link">
+
+            Browse Products
+            <i class="bi bi-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+    <div class="welcome-icon">
+        <i class="bi bi-basket2"></i>
+    </div>
+
+</div>
+
+
+<!-- OVERVIEW CARDS -->
+
+<div class="row g-4 mb-5">
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="stat-card">
+
+            <div class="stat-icon green">
+                <i class="bi bi-box-seam"></i>
+            </div>
+
+            <div class="stat-number">5</div>
+
+            <h3>Products</h3>
+
+            <p>Products in the cafeteria catalog</p>
+
+            <a asp-action="Products">
+                View Products
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="stat-card">
+
+            <div class="stat-icon blue">
+                <i class="bi bi-buildings"></i>
+            </div>
+
+            <div class="stat-number">3</div>
+
+            <h3>Suppliers</h3>
+
+            <p>Listed supplier companies</p>
+
+            <a asp-action="Suppliers">
+                View Suppliers
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="stat-card">
+
+            <div class="stat-icon amber">
+                <i class="bi bi-collection"></i>
+            </div>
+
+            <div class="stat-number">@categories.Length</div>
+
+            <h3>Categories</h3>
+
+            <p>Product categories</p>
+
+            <a href="#categories">
+                View Categories
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- CATEGORIES -->
+
+<section id="categories">
+
+    <div class="section-header">
+
+        <div>
+            <h2>Product Categories</h2>
+
+            <p>
+                Explore the available cafeteria product categories.
+            </p>
+        </div>
+
+        <span class="section-badge">
+            @categories.Length Categories
+        </span>
+
+    </div>
+
+    <div class="row g-4">
+
+        @foreach (string category in categories)
+        {
+            int currentIndex = index;
+
+            <div class="col-xl-4 col-md-6">
+
+                <div class="category-card">
+
+                    <div class="category-icon">
+
+                        <i class="bi @icons[currentIndex % icons.Length]"></i>
+
+                    </div>
+
+                    <h3>@category</h3>
+
+                    <p>
+                        @descriptions[currentIndex % descriptions.Length]
+                    </p>
+
+                    <div class="category-footer">
+
+                        <span>Product Category</span>
+
+                        <i class="bi bi-check-circle"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            index++;
+        }
+
+    </div>
+
+</section>

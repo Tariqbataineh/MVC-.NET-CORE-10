@@ -1,7 +1,63 @@
-@{
-    ViewData["Title"] = "Request Result";
-    ViewData["NavTitle"] = "Request Result";
-}
-<div class="page-eyebrow"><span class="eyebrow-dot"></span> FORM VALIDATION</div>
-<div class="page-header"><div><h1 class="page-title">Request validation</h1><p class="page-subtitle">Review the message below and try again.</p></div></div>
-<section class="panel-card result-panel"><div class="result-symbol error-symbol">!</div><h2>Request needs attention</h2>@if (ViewBag.Error != null){<div class="validation-alert" role="alert">@ViewBag.Error</div>}<p>Please return to the form and correct the request details.</p><a asp-action="CreateRequest" class="primary-button">Back to request form <span>↗</span></a></section>
+<div class="page-header">
+
+    <div>
+        <h1>Request Status</h1>
+
+        <p>
+            Review the information below.
+        </p>
+    </div>
+
+</div>
+
+
+<div class="result-card">
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="result-icon error">
+            <i class="bi bi-exclamation-circle"></i>
+        </div>
+
+        <h2>Request Could Not Be Submitted</h2>
+
+        <p>
+            Please review your request details and try again.
+        </p>
+
+        <div class="error-message">
+            <i class="bi bi-exclamation-triangle"></i>
+
+            <span>@ViewBag.Error</span>
+        </div>
+
+        <a asp-controller="Supply"
+           asp-action="CreateRequest"
+           class="primary-btn">
+
+            <i class="bi bi-arrow-left"></i>
+            Back to Request Form
+
+        </a>
+    }
+    else
+    {
+        <div class="result-icon">
+            <i class="bi bi-info-circle"></i>
+        </div>
+
+        <h2>Request Information</h2>
+
+        <p>
+            No request result is available.
+        </p>
+
+        <a asp-action="CreateRequest"
+           class="primary-btn">
+
+            Create Request
+
+        </a>
+    }
+
+</div>

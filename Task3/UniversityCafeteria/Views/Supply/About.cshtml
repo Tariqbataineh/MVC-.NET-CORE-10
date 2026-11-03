@@ -1,11 +1,126 @@
-@{
-    ViewData["Title"] = "About";
-    ViewData["NavTitle"] = "About";
-}
-<div class="page-eyebrow"><span class="eyebrow-dot"></span> ABOUT THE PLATFORM</div>
-<div class="page-header"><div><h1 class="page-title">Built for better supply management.</h1><p class="page-subtitle">A simple university cafeteria supply management experience.</p></div><span class="header-chip">ABOUT THE SYSTEM</span></div>
+<div class="page-header">
+
+    <div>
+        <h1>About the System</h1>
+
+        <p>
+            Orange University Cafeteria Supply Management.
+        </p>
+    </div>
+
+</div>
+
+
+<!-- SUCCESS MESSAGE -->
 @if (TempData["Message"] is string message)
 {
-    <div class="success-alert" role="status"><span class="success-check">✓</span><div><strong>Request submitted</strong><p>@message</p></div></div>
+    <div class="success-message">
+
+        <div class="success-icon">
+            <i class="bi bi-check-lg"></i>
+        </div>
+
+        <div>
+            <strong>Request Submitted Successfully</strong>
+
+            <p>@message</p>
+        </div>
+
+    </div>
 }
-<section class="panel-card about-panel"><div class="section-overline">OUR PURPOSE</div><h2>Orange University Cafeteria</h2><p>This ASP.NET Core MVC application demonstrates how to organize cafeteria products, suppliers, and supply requests in a single system.</p><div class="about-divider"></div><div class="about-points"><div><span>01</span><strong>Product Information</strong><p>Send product details to Razor Views with ViewData.</p></div><div><span>02</span><strong>Supplier Directory</strong><p>Pass supplier information with ViewBag.</p></div><div><span>03</span><strong>Supply Requests</strong><p>Receive forms with Request.Form and show confirmation using TempData.</p></div></div></section>
+
+
+<!-- ABOUT SECTION -->
+
+<div class="content-card about-card">
+
+    <div class="about-icon">
+        <i class="bi bi-mortarboard"></i>
+    </div>
+
+    <h2>Orange University Cafeteria</h2>
+
+    <p>
+        The Cafeteria Supply Management System provides
+        a centralized platform for organizing cafeteria
+        products, viewing supplier information, and
+        submitting supply requests.
+    </p>
+
+</div>
+
+
+<!-- SYSTEM SECTIONS -->
+
+<div class="section-header">
+
+    <div>
+        <h2>System Features</h2>
+
+        <p>
+            Core services available through the platform.
+        </p>
+    </div>
+
+</div>
+
+<div class="row g-4">
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="bi bi-box-seam"></i>
+            </div>
+
+            <h3>Product Management</h3>
+
+            <p>
+                Browse and review the products
+                listed in the cafeteria catalog.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="bi bi-buildings"></i>
+            </div>
+
+            <h3>Supplier Directory</h3>
+
+            <p>
+                Access information about the companies
+                supplying cafeteria products.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="bi bi-file-earmark-text"></i>
+            </div>
+
+            <h3>Supply Requests</h3>
+
+            <p>
+                Submit product supply requests
+                through a structured request form.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
