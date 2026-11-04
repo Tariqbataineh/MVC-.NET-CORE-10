@@ -1,0 +1,4 @@
+@{ ViewData["Title"] = "Products"; string[] products = { "Water", "Orange Juice", "Coffee", "Sandwich", "Chocolate" }; }
+@section Styles { <link rel="stylesheet" href="~/css/products.css" asp-append-version="true" /> }
+<section class="panel products-page"><h2>Available products</h2><ul class="product-list">@foreach (var product in products) { <li>@product</li> }</ul>@if (products.Length >= 3) { <p class="text-success">We have enough Products.</p> } else { <p class="text-danger">We need more Products.</p> }</section>
+@section Scripts { <script>alert("Welcome to the Products Page!");</script> }

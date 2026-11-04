@@ -1,0 +1,1 @@
+@{ ViewData["Title"] = "Our Suppliers"; }<section class="panel"><h2>@ViewBag.PageTitle</h2><p>Supplier count: @ViewBag.SupplierCount</p><ul class="list-group">@foreach (string name in (string[])ViewBag.Suppliers) { <li class="list-group-item">@name</li> }</ul></section>
