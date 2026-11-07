@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+
+<div class="container mt-4">
+
+    <h2>About Our System</h2>
+
+    <hr />
+
+    <h4>System Name</h4>
+
+    <p>
+        Academy Graduation Ceremony Supply Management System
+    </p>
+
+    <h4>Description</h4>
+
+    <p>
+        This system helps the academy manage graduation ceremony supplies
+        using ASP.NET Core MVC.
+    </p>
+
+    <h4>Features</h4>
+
+    <ul>
+        <li>Display supplier offers.</li>
+        <li>Select one offer from each category.</li>
+        <li>Save selected offers using Session.</li>
+        <li>Store offers in SQL Server.</li>
+        <li>Calculate total prices and discounts.</li>
+        <li>Review selected offers.</li>
+    </ul>
+
+    <a href="@Url.Action("Index", "Supply")"
+       class="btn btn-primary">
+        Back to Offers
+    </a>
+
+</div>

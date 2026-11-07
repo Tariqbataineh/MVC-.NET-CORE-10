@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Review Offers";
+}
+
+<h2>Review Selected Offers</h2>
+
+<div class="alert alert-info">
+    <h4>Certificate Total</h4>
+    <p>@ViewBag.CertificateTotal JD</p>
+</div>
+
+<a asp-controller="Supply"
+   asp-action="Index"
+   class="btn btn-secondary">
+    Back to Offers
+</a>

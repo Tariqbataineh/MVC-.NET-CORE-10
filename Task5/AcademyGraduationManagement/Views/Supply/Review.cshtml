@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Review Offers";
+}
+
+<div class="container mt-4">
+
+    <h2>Review Selected Offers</h2>
+
+    <table class="table table-bordered table-striped mt-4">
+
+        <tr class="table-dark">
+            <th>Category</th>
+            <th>Supplier</th>
+            <th>Offer</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+
+        <tr>
+            <td>Certificates</td>
+            <td>@ViewBag.CertificateSupplier</td>
+            <td>@ViewBag.CertificateOfferName</td>
+            <td>@ViewBag.CertificateQuantity</td>
+            <td>@ViewBag.CertificatePrice JD</td>
+            <td>@ViewBag.CertificateTotal JD</td>
+        </tr>
+
+        <tr>
+            <td>Hospitality</td>
+            <td>@ViewBag.HospitalitySupplier</td>
+            <td>@ViewBag.HospitalityOfferName</td>
+            <td>@ViewBag.HospitalityQuantity</td>
+            <td>@ViewBag.HospitalityPrice JD</td>
+            <td>@ViewBag.HospitalityTotal JD</td>
+        </tr>
+
+        <tr>
+            <td>Gifts</td>
+            <td>@ViewBag.GiftSupplier</td>
+            <td>@ViewBag.GiftOfferName</td>
+            <td>@ViewBag.GiftQuantity</td>
+            <td>@ViewBag.GiftPrice JD</td>
+            <td>@ViewBag.GiftTotal JD</td>
+        </tr>
+
+    </table>
+
+    <div class="card mt-4">
+        <div class="card-body">
+
+            <h4>Order Summary</h4>
+
+            <p>Total: @ViewBag.TotalPrice JD</p>
+
+            <p>Discount: @ViewBag.DiscountPercentage %</p>
+
+            <p>Discount Amount: @ViewBag.DiscountAmount JD</p>
+
+            <h4 class="text-success">
+                Final Total: @ViewBag.FinalTotal JD
+            </h4>
+
+        </div>
+    </div>
+
+    <a href="@Url.Action("Index", "Supply")"
+       class="btn btn-secondary mt-3">
+        Back to Offers
+    </a>
+
+</div>

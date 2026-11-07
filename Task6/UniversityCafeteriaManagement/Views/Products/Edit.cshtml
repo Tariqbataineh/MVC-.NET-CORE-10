@@ -1,0 +1,52 @@
+﻿@model UniversityCafeteriaManagement.Models.Product
+
+<h2>Edit Product</h2>
+
+@if (TempData["Error"] != null)
+{
+    <p class="text-danger">@TempData["Error"]</p>
+}
+
+<form method="post" action="@Url.Action("Edit", "Products")">
+
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <label>Name</label>
+    <input name="name" value="@Model.Name"
+           class="form-control mb-3" required />
+
+    <label>Price</label>
+    <input type="number" name="price" step="0.01" min="0"
+           value="@Model.Price" class="form-control mb-3" required />
+
+    <label>Quantity</label>
+    <input type="number" name="quantity" min="0"
+           value="@Model.Quantity" class="form-control mb-3" required />
+
+    <label>Category</label>
+    <select name="categoryId" class="form-select mb-3">
+        @foreach (var category in ViewBag.Categories)
+        {
+            <option value="@category.Id"
+                    selected="@(category.Id == Model.CategoryId)">
+                @category.Name
+            </option>
+        }
+    </select>
+
+    <label>Supplier</label>
+    <select name="supplierId" class="form-select mb-3">
+        @foreach (var supplier in ViewBag.Suppliers)
+        {
+            <option value="@supplier.Id"
+                    selected="@(supplier.Id == Model.SupplierId)">
+                @supplier.Name
+            </option>
+        }
+    </select>
+
+    <button class="btn btn-success">Save Changes</button>
+
+</form>

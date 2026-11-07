@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+
+        <div class="container">
+
+            <a class="navbar-brand" href="@Url.Action("Index", "Supply")">
+                Graduation System
+            </a>
+
+            <div class="navbar-nav">
+
+                <a class="nav-link" href="@Url.Action("Index", "Supply")">
+                    Offers
+                </a>
+
+                <a class="nav-link" href="@Url.Action("Review", "Supply")">
+                    Review
+                </a>
+
+                <a class="nav-link" href="@Url.Action("About", "Supply")">
+                    About
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

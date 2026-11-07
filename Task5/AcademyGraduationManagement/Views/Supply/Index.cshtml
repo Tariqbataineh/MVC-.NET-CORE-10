@@ -1,0 +1,72 @@
+﻿@model List<AcademyGraduationManagement.Models.Category>
+
+@{
+    ViewData["Title"] = "Offers";
+}
+
+<div class="container mt-4">
+
+    <h2>Graduation Supply Management</h2>
+
+    <p>Select one offer from each category.</p>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    <form action="@Url.Action("SaveOffers", "Supply")" method="post">
+
+        @Html.AntiForgeryToken()
+
+        @foreach (var category in Model)
+        {
+            <h3 class="mt-4">@category.Name</h3>
+
+            <table class="table table-bordered table-striped">
+
+                <tr>
+                    <th>Supplier</th>
+                    <th>Offer</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Select</th>
+                </tr>
+
+                @foreach (var offer in category.Offers.OrderBy(o => o.Id))
+                {
+                    <tr>
+                        <td>@offer.SupplierName</td>
+                        <td>@offer.OfferName</td>
+                        <td>@offer.Quantity</td>
+                        <td>@offer.UnitPrice JD</td>
+
+                        <td>
+                            @if (category.Id == 1)
+                            {
+                                <input type="radio" name="certificateOffer" value="@offer.Id" required />
+                            }
+                            else if (category.Id == 2)
+                            {
+                                <input type="radio" name="hospitalityOffer" value="@offer.Id" required />
+                            }
+                            else
+                            {
+                                <input type="radio" name="giftOffer" value="@offer.Id" required />
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+
+        <button type="submit" class="btn btn-primary">
+            Save Offers
+        </button>
+
+    </form>
+
+</div>

@@ -1,0 +1,41 @@
+﻿<h2>Add Product</h2>
+
+@if (TempData["Error"] != null)
+{
+    <p class="text-danger">@TempData["Error"]</p>
+}
+
+<form method="post" action="@Url.Action("Create", "Products")">
+
+    @Html.AntiForgeryToken()
+
+    <label>Name</label>
+    <input name="name" class="form-control mb-3" required />
+
+    <label>Price</label>
+    <input type="number" name="price" step="0.01"
+           min="0" class="form-control mb-3" required />
+
+    <label>Quantity</label>
+    <input type="number" name="quantity"
+           min="0" class="form-control mb-3" required />
+
+    <label>Category</label>
+    <select name="categoryId" class="form-select mb-3" required>
+        @foreach (var category in ViewBag.Categories)
+        {
+            <option value="@category.Id">@category.Name</option>
+        }
+    </select>
+
+    <label>Supplier</label>
+    <select name="supplierId" class="form-select mb-3" required>
+        @foreach (var supplier in ViewBag.Suppliers)
+        {
+            <option value="@supplier.Id">@supplier.Name</option>
+        }
+    </select>
+
+    <button class="btn btn-success">Save</button>
+
+</form>
