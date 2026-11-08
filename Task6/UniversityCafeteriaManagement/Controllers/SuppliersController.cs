@@ -23,7 +23,7 @@ namespace UniversityCafeteriaManagement.Controllers
             return View(suppliers);
         }
 
-        // Display Create Page
+        // Open Create Page
         [Authorize]
         [HttpGet]
         public IActionResult Create()
@@ -31,27 +31,29 @@ namespace UniversityCafeteriaManagement.Controllers
             return View();
         }
 
-        // Save Supplier
+        // Save New Supplier
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(string name, string email, string? phone)
         {
-            if (string.IsNullOrWhiteSpace(name) ||
-                string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email))
             {
                 ViewBag.Error = "Please enter supplier name and email.";
+
                 return View();
             }
 
-            Supplier supplier = new Supplier
-            {
-                Name = name,
-                Email = email,
-                Phone = phone
-            };
+            // Create Supplier
+            Supplier supplier = new Supplier();
 
+            supplier.Name = name;
+            supplier.Email = email;
+            supplier.Phone = phone;
+
+            // Save to Database
             db.Suppliers.Add(supplier);
+
             db.SaveChanges();
 
             return RedirectToAction("Index");

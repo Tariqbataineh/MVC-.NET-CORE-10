@@ -22,7 +22,6 @@ namespace AcademyGraduationManagement.Controllers
             return View(categories);
         }
 
-
         // Save Offers
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -31,25 +30,35 @@ namespace AcademyGraduationManagement.Controllers
             if (certificateOffer == null || hospitalityOffer == null || giftOffer == null)
             {
                 TempData["Error"] = "Please select all offers.";
+
                 return RedirectToAction("Index");
             }
 
-            bool c = db.Offers.Any(o => o.Id == certificateOffer && o.CategoryId == 1);
-            bool h = db.Offers.Any(o => o.Id == hospitalityOffer && o.CategoryId == 2);
-            bool g = db.Offers.Any(o => o.Id == giftOffer && o.CategoryId == 3);
+            // Check Selected Offers
+            var certificate = db.Offers.Find(certificateOffer.Value);
+            var hospitality = db.Offers.Find(hospitalityOffer.Value);
+            var gift = db.Offers.Find(giftOffer.Value);
 
-            if (!c || !h || !g)
+            if (certificate == null || hospitality == null || gift == null)
             {
-                TempData["Error"] = "Invalid offer selection.";
+                TempData["Error"] = "Invalid offers.";
+
                 return RedirectToAction("Index");
             }
 
-            List<int> selectedOffers = new List<int>
+            if (certificate.CategoryId != 1 || hospitality.CategoryId != 2 || gift.CategoryId != 3)
             {
-                certificateOffer.Value,
-                hospitalityOffer.Value,
-                giftOffer.Value
-            };
+                TempData["Error"] = "Invalid categories.";
+
+                return RedirectToAction("Index");
+            }
+
+            // Save List in Session
+            List<int> selectedOffers = new List<int>();
+
+            selectedOffers.Add(certificateOffer.Value);
+            selectedOffers.Add(hospitalityOffer.Value);
+            selectedOffers.Add(giftOffer.Value);
 
             string offers = string.Join(",", selectedOffers);
 
@@ -57,7 +66,6 @@ namespace AcademyGraduationManagement.Controllers
 
             return RedirectToAction("Review");
         }
-
 
         // Review Offers
         [HttpGet]
@@ -81,7 +89,9 @@ namespace AcademyGraduationManagement.Controllers
 
             foreach (string value in values)
             {
-                if (!int.TryParse(value, out int id))
+                int id;
+
+                if (!int.TryParse(value, out id))
                 {
                     return RedirectToAction("Index");
                 }
@@ -89,6 +99,7 @@ namespace AcademyGraduationManagement.Controllers
                 selectedOffers.Add(id);
             }
 
+            // Get Offers from Database
             var certificate = db.Offers.Find(selectedOffers[0]);
             var hospitality = db.Offers.Find(selectedOffers[1]);
             var gift = db.Offers.Find(selectedOffers[2]);
@@ -105,12 +116,14 @@ namespace AcademyGraduationManagement.Controllers
 
             // Calculate Prices
             decimal certificateTotal = certificate.Quantity * certificate.UnitPrice;
+
             decimal hospitalityTotal = hospitality.Quantity * hospitality.UnitPrice;
+
             decimal giftTotal = gift.Quantity * gift.UnitPrice;
 
             decimal total = certificateTotal + hospitalityTotal + giftTotal;
 
-            // Discount
+            // Calculate Discount
             decimal discount = 0;
 
             if (total > 500)
@@ -125,7 +138,6 @@ namespace AcademyGraduationManagement.Controllers
             decimal discountAmount = total * discount / 100;
 
             decimal finalTotal = total - discountAmount;
-
 
             // Certificates
             ViewBag.CertificateSupplier = certificate.SupplierName;
@@ -148,7 +160,7 @@ namespace AcademyGraduationManagement.Controllers
             ViewBag.GiftPrice = gift.UnitPrice;
             ViewBag.GiftTotal = giftTotal;
 
-            // Total
+            // Final Total
             ViewBag.TotalPrice = total;
             ViewBag.DiscountPercentage = discount;
             ViewBag.DiscountAmount = discountAmount;
@@ -156,7 +168,6 @@ namespace AcademyGraduationManagement.Controllers
 
             return View();
         }
-
 
         // About Page
         [HttpGet]

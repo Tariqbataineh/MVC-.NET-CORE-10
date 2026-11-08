@@ -1,4 +1,3 @@
-﻿using UniversityCafeteriaManagement.Models;
 
 namespace UniversityCafeteriaManagement.CodeFirstModels
 {

@@ -72,3 +72,11 @@ SELECT * FROM Suppliers;
 SELECT * FROM Products;
 SELECT * FROM PurchaseOrders;
 SELECT * FROM PurchaseOrderItems;
+
+
+SELECT @@SERVERNAME AS ServerName;
+SELECT DB_NAME() AS CurrentDatabase;
+
+SELECT name
+FROM sys.databases
+WHERE name = 'CafeteriaDB';

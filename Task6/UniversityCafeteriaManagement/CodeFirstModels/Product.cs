@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using UniversityCafeteriaManagement.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UniversityCafeteriaManagement.CodeFirstModels
 {

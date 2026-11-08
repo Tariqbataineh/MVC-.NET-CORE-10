@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using UniversityCafeteriaManagement.Data;
 using UniversityCafeteriaManagement.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace UniversityCafeteriaManagement.Controllers
 {
@@ -14,49 +15,71 @@ namespace UniversityCafeteriaManagement.Controllers
             db = context;
         }
 
+        // Display Products
+        [HttpGet]
         public IActionResult Index()
         {
-            return View(db.Products.ToList());
+            var products = db.Products.ToList();
+
+            ViewBag.Categories = db.Categories.ToList();
+            ViewBag.Suppliers = db.Suppliers.ToList();
+
+            return View(products);
         }
 
+        // Open Create Page
         [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
             ViewBag.Categories = db.Categories.ToList();
             ViewBag.Suppliers = db.Suppliers.ToList();
+
             return View();
         }
 
+
+        // Save New Product
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(string name, decimal price, int quantity,
                                     int categoryId, int supplierId)
         {
-            if (string.IsNullOrWhiteSpace(name) || price < 0 || quantity < 0 ||
-                !db.Categories.Any(x => x.Id == categoryId) ||
-                !db.Suppliers.Any(x => x.Id == supplierId))
+            if (string.IsNullOrWhiteSpace(name) || price < 0 || quantity < 0)
             {
                 TempData["Error"] = "Invalid product information.";
+
                 return RedirectToAction("Create");
             }
 
-            Product product = new Product
+            var category = db.Categories.Find(categoryId);
+            var supplier = db.Suppliers.Find(supplierId);
+
+            if (category == null || supplier == null)
             {
-                Name = name,
-                Price = price,
-                Quantity = quantity,
-                CategoryId = categoryId,
-                SupplierId = supplierId
-            };
+                TempData["Error"] = "Invalid category or supplier.";
+
+                return RedirectToAction("Create");
+            }
+
+            Product product = new Product();
+
+            product.Name = name;
+            product.Price = price;
+            product.Quantity = quantity;
+            product.CategoryId = categoryId;
+            product.SupplierId = supplierId;
 
             db.Products.Add(product);
+
             db.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
+
+        // Open Edit Page
         [Authorize]
         [HttpGet]
         public IActionResult Edit(int id)
@@ -64,7 +87,9 @@ namespace UniversityCafeteriaManagement.Controllers
             var product = db.Products.Find(id);
 
             if (product == null)
+            {
                 return NotFound();
+            }
 
             ViewBag.Categories = db.Categories.ToList();
             ViewBag.Suppliers = db.Suppliers.ToList();
@@ -72,6 +97,8 @@ namespace UniversityCafeteriaManagement.Controllers
             return View(product);
         }
 
+
+        // Save Product Changes
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -81,14 +108,25 @@ namespace UniversityCafeteriaManagement.Controllers
             var product = db.Products.Find(id);
 
             if (product == null)
+            {
                 return NotFound();
+            }
 
-            if (string.IsNullOrWhiteSpace(name) || price < 0 || quantity < 0 ||
-                !db.Categories.Any(x => x.Id == categoryId) ||
-                !db.Suppliers.Any(x => x.Id == supplierId))
+            if (string.IsNullOrWhiteSpace(name) || price < 0 || quantity < 0)
             {
                 TempData["Error"] = "Invalid product information.";
-                return RedirectToAction("Edit", new { id });
+
+                return RedirectToAction("Edit", new { id = id });
+            }
+
+            var category = db.Categories.Find(categoryId);
+            var supplier = db.Suppliers.Find(supplierId);
+
+            if (category == null || supplier == null)
+            {
+                TempData["Error"] = "Invalid category or supplier.";
+
+                return RedirectToAction("Edit", new { id = id });
             }
 
             product.Name = name;
@@ -102,6 +140,8 @@ namespace UniversityCafeteriaManagement.Controllers
             return RedirectToAction("Index");
         }
 
+
+        // Delete Product
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -110,15 +150,22 @@ namespace UniversityCafeteriaManagement.Controllers
             var product = db.Products.Find(id);
 
             if (product == null)
+            {
                 return NotFound();
+            }
 
-            if (db.PurchaseOrderItems.Any(x => x.ProductId == id))
+            var orderItem = db.PurchaseOrderItems
+                .FirstOrDefault(item => item.ProductId == id);
+
+            if (orderItem != null)
             {
                 TempData["Error"] = "Product is used in a purchase order.";
+
                 return RedirectToAction("Index");
             }
 
             db.Products.Remove(product);
+
             db.SaveChanges();
 
             return RedirectToAction("Index");

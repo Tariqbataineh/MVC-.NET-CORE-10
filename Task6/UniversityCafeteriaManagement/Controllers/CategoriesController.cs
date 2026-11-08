@@ -14,11 +14,16 @@ namespace UniversityCafeteriaManagement.Controllers
             db = context;
         }
 
+        // Display Categories
+        [HttpGet]
         public IActionResult Index()
         {
-            return View(db.Categories.ToList());
+            var categories = db.Categories.ToList();
+
+            return View(categories);
         }
 
+        // Open Create Page
         [Authorize]
         [HttpGet]
         public IActionResult Create()
@@ -26,6 +31,7 @@ namespace UniversityCafeteriaManagement.Controllers
             return View();
         }
 
+        // Save Category
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -36,13 +42,13 @@ namespace UniversityCafeteriaManagement.Controllers
                 return View();
             }
 
-            Category category = new Category
-            {
-                Name = name,
-                Description = description
-            };
+            Category category = new Category();
+
+            category.Name = name;
+            category.Description = description;
 
             db.Categories.Add(category);
+
             db.SaveChanges();
 
             return RedirectToAction("Index");
