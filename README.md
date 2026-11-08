@@ -1,1 +1,0 @@
-# MVC-.NET-CORE-10

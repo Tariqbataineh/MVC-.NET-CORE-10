@@ -1,0 +1,32 @@
+﻿<h2>Add Supplier</h2>
+
+<p style="color:red">@ViewBag.Error</p>
+
+@using (Html.BeginForm("Create", "Supplier", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <label>Name</label>
+    @Html.TextBox("Name")
+
+    <br />
+    <br />
+
+    <label>Phone</label>
+    @Html.TextBox("Phone")
+
+    <br />
+    <br />
+
+    <label>Email</label>
+    @Html.TextBox("Email")
+
+    <br />
+    <br />
+
+    <button type="submit">Save</button>
+}
+
+<br />
+
+@Html.ActionLink("Back", "Index", "Supplier")

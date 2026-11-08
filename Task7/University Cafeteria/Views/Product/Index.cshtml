@@ -1,0 +1,37 @@
+﻿@model List<UniversityCafeteria.Models.Product>
+
+<h2>Products</h2>
+
+@Html.ActionLink("Add Product", "Create", "Product")
+
+<br />
+<br />
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Category ID</th>
+        <th>Supplier ID</th>
+    </tr>
+
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>@product.Id</td>
+            <td>@product.Name</td>
+            <td>@product.Price</td>
+            <td>@product.Quantity</td>
+            <td>@product.CategoryId</td>
+            <td>@product.SupplierId</td>
+        </tr>
+    }
+</table>
+
+<br />
+
+@Html.ActionLink("Categories", "Index", "Category")
+<br />
+@Html.ActionLink("Suppliers", "Index", "Supplier")

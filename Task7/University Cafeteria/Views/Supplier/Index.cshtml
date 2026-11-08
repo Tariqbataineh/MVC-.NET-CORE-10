@@ -1,0 +1,33 @@
+﻿@model List<UniversityCafeteria.Models.Supplier>
+
+<h2>Suppliers</h2>
+
+@Html.ActionLink("Add Supplier", "Create", "Supplier")
+
+<br />
+<br />
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+    </tr>
+
+    @foreach (var supplier in Model)
+    {
+        <tr>
+            <td>@supplier.Id</td>
+            <td>@supplier.Name</td>
+            <td>@supplier.Phone</td>
+            <td>@supplier.Email</td>
+        </tr>
+    }
+</table>
+
+<br />
+
+@Html.ActionLink("Categories", "Index", "Category")
+<br />
+@Html.ActionLink("Products", "Index", "Product")

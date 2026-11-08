@@ -1,0 +1,26 @@
+﻿<h2>Add Category</h2>
+
+<p style="color:red">@ViewBag.Error</p>
+
+@using (Html.BeginForm("Create", "Category", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <label>Name</label>
+    @Html.TextBox("Name")
+
+    <br />
+    <br />
+
+    <label>Description</label>
+    @Html.TextBox("Description")
+
+    <br />
+    <br />
+
+    <button type="submit">Save</button>
+}
+
+<br />
+
+@Html.ActionLink("Back", "Index", "Category")
