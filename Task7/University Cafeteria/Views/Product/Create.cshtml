@@ -1,53 +1,53 @@
-﻿@using Microsoft.AspNetCore.Mvc.Rendering
+﻿@model Product
 
 <h2>Add Product</h2>
 
 <p style="color:red">@ViewBag.Error</p>
 
-@using (Html.BeginForm("Create", "Product", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+<form method="post" asp-controller="Product" asp-action="Create">
 
     <label>Name</label>
-    @Html.TextBox("Name")
+    <input type="text" name="Name" required />
 
-    <br />
-    <br />
+    <br /><br />
 
     <label>Price</label>
-    @Html.TextBox("Price", null, new { type = "number", step = "0.01", min = "0" })
+    <input type="number" name="Price" step="0.01" min="0" required />
 
-    <br />
-    <br />
+    <br /><br />
 
     <label>Quantity</label>
-    @Html.TextBox("Quantity", null, new { type = "number", min = "0" })
+    <input type="number" name="Quantity" min="0" required />
 
-    <br />
-    <br />
+    <br /><br />
 
     <label>Category</label>
-    @Html.DropDownList(
-        "CategoryId",
-        new SelectList(ViewBag.Categories, "Id", "Name"),
-        "Select Category"
-    )
+    <select name="CategoryId" required>
+        <option value="">Select Category</option>
 
-    <br />
-    <br />
+        @foreach (var category in ViewBag.Categories)
+        {
+            <option value="@category.Id">@category.Name</option>
+        }
+    </select>
+
+    <br /><br />
 
     <label>Supplier</label>
-    @Html.DropDownList(
-        "SupplierId",
-        new SelectList(ViewBag.Suppliers, "Id", "Name"),
-        "Select Supplier"
-    )
+    <select name="SupplierId" required>
+        <option value="">Select Supplier</option>
 
-    <br />
-    <br />
+        @foreach (var supplier in ViewBag.Suppliers)
+        {
+            <option value="@supplier.Id">@supplier.Name</option>
+        }
+    </select>
+
+    <br /><br />
 
     <button type="submit">Save</button>
-}
+
+</form>
 
 <br />
 

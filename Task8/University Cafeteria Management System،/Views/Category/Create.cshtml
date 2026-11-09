@@ -1,0 +1,26 @@
+﻿@model Category
+<h2>Add Category</h2>
+
+<form action="/Category/Create" method="post">
+
+    @Html.AntiForgeryToken()
+
+    <label>Name</label>
+    <input type="text" name="Name" />
+
+    <br />
+    <br />
+
+    <label>Description</label>
+    <input type="text" name="Description" />
+
+    <br />
+    <br />
+
+    <button type="submit">Save</button>
+
+</form>
+
+<br />
+
+<a href="/Category/Index">Back</a>

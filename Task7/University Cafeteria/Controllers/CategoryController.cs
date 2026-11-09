@@ -28,7 +28,6 @@ namespace UniversityCafeteria.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Create(Category category)
         {
             if (string.IsNullOrWhiteSpace(category.Name))

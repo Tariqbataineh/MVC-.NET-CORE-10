@@ -28,7 +28,6 @@ namespace UniversityCafeteria.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Create(Supplier supplier)
         {
             if (string.IsNullOrWhiteSpace(supplier.Name) ||

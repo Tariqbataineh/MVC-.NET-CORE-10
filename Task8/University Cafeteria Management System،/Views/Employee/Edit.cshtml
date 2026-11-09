@@ -1,0 +1,48 @@
+﻿@model Employee
+
+<h2>Edit Employee</h2>
+
+<form action="/Employee/Edit" method="post">
+
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <label>Full Name</label>
+    <input type="text" name="FullName" value="@Model.FullName" />
+
+    <br /><br />
+
+    <label>Phone</label>
+    <input type="text" name="Phone" value="@Model.Phone" />
+
+    <br /><br />
+
+    <label>Email</label>
+    <input type="email" name="Email" value="@Model.Email" />
+
+    <br /><br />
+
+    <label>Position</label>
+    <input type="text" name="Position" value="@Model.Position" />
+
+    <br /><br />
+
+    <label>Salary</label>
+    <input type="number" step="0.01" name="Salary"
+           value="@Model.Salary" />
+
+    <br /><br />
+
+    <label>Hire Date</label>
+    <input type="date" name="HireDate"
+           value="@Model.HireDate.ToString("yyyy-MM-dd")" />
+
+    <br /><br />
+
+    <button type="submit">Save Changes</button>
+</form>
+
+<br />
+
+<a href="/Employee/Index">Back</a>

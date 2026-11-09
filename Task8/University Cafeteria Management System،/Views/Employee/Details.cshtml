@@ -1,0 +1,38 @@
+﻿@model Employee
+
+<h2>Employee Details</h2>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Full Name</th>
+        <td>@Model.FullName</td>
+    </tr>
+    <tr>
+        <th>Phone</th>
+        <td>@Model.Phone</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <th>Position</th>
+        <td>@Model.Position</td>
+    </tr>
+    <tr>
+        <th>Salary</th>
+        <td>@Model.Salary</td>
+    </tr>
+    <tr>
+        <th>Hire Date</th>
+        <td>@Model.HireDate.ToShortDateString()</td>
+    </tr>
+</table>
+
+<br />
+
+<a href="/Employee/Index">Back</a>

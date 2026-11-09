@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>University Cafeteria</title>
+
+    <style>
+            body {
+                margin: 0;
+                font-family: Arial;
+                background: #f1f5f9;
+                color: #1e293b;
+            }
+
+            nav {
+                background: #17365d;
+                padding: 20px;
+            }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+                margin-right: 25px;
+                font-weight: bold;
+            }
+
+            .container {
+                width: 90%;
+                margin: 30px auto;
+                background: white;
+                padding: 25px;
+                border-radius: 10px;
+            }
+
+            h2 { color: #17365d; }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+
+            th {
+                background: #17365d;
+                color: white;
+            }
+
+            th, td {
+                padding: 12px;
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+
+            input, textarea, select {
+                width: 100%;
+                padding: 10px;
+                margin: 7px 0 15px;
+                border: 1px solid #cbd5e1;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+
+            .btn {
+                display: inline-block;
+                padding: 9px 13px;
+                border: 0;
+                border-radius: 5px;
+                color: white;
+                text-decoration: none;
+                cursor: pointer;
+                margin: 2px;
+            }
+
+            .green { background: #16a34a; }
+            .blue { background: #2563eb; }
+            .orange { background: #ea8c0c; }
+            .red { background: #dc2626; }
+            .gray { background: #64748b; }
+
+            .low-stock {
+                color: #dc2626;
+                font-weight: bold;
+            }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="/Category/Index">Categories</a>
+        <a href="/Supplier/Index">Suppliers</a>
+        <a href="/Product/Index">Products</a>
+        <a href="/Employee/Index">Employees</a>
+        <a href="/Order/Index">Orders</a>
+    </nav>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,28 @@
+﻿@model Category
+<h2>Edit Category</h2>
+
+<form action="/Category/Edit" method="post">
+
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <label>Name</label>
+    <input type="text" name="Name" value="@Model.Name" />
+
+    <br />
+    <br />
+
+    <label>Description</label>
+    <input type="text" name="Description" value="@Model.Description" />
+
+    <br />
+    <br />
+
+    <button type="submit">Save Changes</button>
+
+</form>
+
+<br />
+
+<a href="/Category/Index">Back</a>

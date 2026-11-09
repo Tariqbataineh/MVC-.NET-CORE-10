@@ -1,0 +1,43 @@
+﻿Z@model Category
+<h2>Categories</h2>
+
+<a href="/Category/Create">Add New Category</a>
+
+<br />
+<br />
+
+<table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Description</td>
+
+            <td>
+                <a href="/Category/Edit/@item.Id">Edit</a>
+
+                <a href="/Category/Details/@item.Id">Details</a>
+
+                <form action="/Category/Delete/@item.Id"
+                      method="post"
+                      onsubmit="return confirm('Are you sure?');">
+
+                    @Html.AntiForgeryToken()
+
+                    <button type="submit">Delete</button>
+
+                </form>
+            </td>
+        </tr>
+    }
+
+</table>

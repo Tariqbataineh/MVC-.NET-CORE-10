@@ -1,26 +1,17 @@
-﻿<h2>Add Category</h2>
+﻿@model Category
 
-<p style="color:red">@ViewBag.Error</p>
+<form method="post" asp-controller="Category" asp-action="Create">
 
-@using (Html.BeginForm("Create", "Category", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <label>Name</label>
-    @Html.TextBox("Name")
-
-    <br />
-    <br />
+    <lable>Name </lable>
+<input type="text" name="Name"/>
 
     <label>Description</label>
-    @Html.TextBox("Description")
+    <input type="text" name="Description" />
 
-    <br />
-    <br />
 
-    <button type="submit">Save</button>
-}
+<button type="submit"> Save </button>
 
-<br />
+</form>
+
 
 @Html.ActionLink("Back", "Index", "Category")

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Product>
+
+<h2>Products</h2>
+
+<a href="/Product/Create">Add Product</a>
+
+<br />
+<br />
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Category</th>
+        <th>Supplier</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Description</td>
+            <td>@item.Price</td>
+            <td>@item.Quantity</td>
+            <td>@item.Category?.Name</td>
+            <td>@item.Supplier?.Name</td>
+            <td>
+                <a href="/Product/Edit/@item.Id">Edit</a>
+                <a href="/Product/Details/@item.Id">Details</a>
+
+                <form action="/Product/Delete/@item.Id"
+                      method="post"
+                      onsubmit="return confirm('Are you sure?');">
+
+                    @Html.AntiForgeryToken()
+
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

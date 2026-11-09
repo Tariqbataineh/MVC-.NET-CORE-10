@@ -1,31 +1,29 @@
-﻿<h2>Add Supplier</h2>
+﻿@model Supplier
+
+<h2>Add Supplier</h2>
 
 <p style="color:red">@ViewBag.Error</p>
 
-@using (Html.BeginForm("Create", "Supplier", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+<form method="post" asp-controller="Supplier" asp-action="Create">
 
     <label>Name</label>
-    @Html.TextBox("Name")
+    <input type="text" name="Name" required />
 
-    <br />
-    <br />
+    <br /><br />
 
     <label>Phone</label>
-    @Html.TextBox("Phone")
+    <input type="text" name="Phone" required />
 
-    <br />
-    <br />
+    <br /><br />
 
     <label>Email</label>
-    @Html.TextBox("Email")
+    <input type="email" name="Email" required />
 
-    <br />
-    <br />
+    <br /><br />
 
     <button type="submit">Save</button>
-}
+
+</form>
 
 <br />
 
