@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Task9 - @ViewData["Title"]</title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <style>
+            body {
+                margin: 0;
+                font-family: 'Segoe UI', sans-serif;
+                background: #f4f5fb;
+                color: #243047;
+            }
+
+            .navbar {
+                background: #171c35;
+                padding: 18px 40px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            }
+
+            .navbar-brand {
+                color: white !important;
+                font-weight: 700;
+                font-size: 24px;
+            }
+
+            .navbar .nav-link {
+                color: #d5d9eb !important;
+                margin: 0 12px;
+                font-weight: 500;
+            }
+
+                .navbar .nav-link:hover {
+                    color: #a99aff !important;
+                }
+
+            .btn-purple {
+                background: #7957e8;
+                color: white;
+                border: none;
+                border-radius: 10px;
+                padding: 9px 22px;
+            }
+
+                .btn-purple:hover {
+                    background: #6342cc;
+                    color: white;
+                }
+
+            .btn-login {
+                color: white;
+                text-decoration: none;
+                margin-right: 18px;
+            }
+
+            .btn-register {
+                background: #7957e8;
+                color: white;
+                text-decoration: none;
+                padding: 10px 22px;
+                border-radius: 10px;
+            }
+
+                .btn-register:hover {
+                    background: #6342cc;
+                    color: white;
+                }
+
+            main {
+                min-height: 75vh;
+            }
+
+            .normal-page {
+                background: white;
+                margin-top: 30px;
+                padding: 30px;
+                border-radius: 16px;
+                box-shadow: 0 5px 25px rgba(0,0,0,0.04);
+            }
+
+            table {
+                width: 100%;
+            }
+
+            th {
+                background: #252c4c;
+                color: white;
+                padding: 12px;
+            }
+
+            td {
+                padding: 12px;
+            }
+
+            footer {
+                text-align: center;
+                color: #858ba2;
+                padding: 25px;
+                margin-top: 35px;
+            }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="/">
+                Task9.
+            </a>
+
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#mainNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+
+                <ul class="navbar-nav mx-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Product/Index">
+                            Products
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/SupplyRequest/Index">
+                            Supply Requests
+                        </a>
+                    </li>
+
+                    @if (User.IsInRole("SuperAdmin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Admin/Index">
+                                Manage Roles
+                            </a>
+                        </li>
+                    }
+
+                </ul>
+
+                <div class="d-flex align-items-center gap-3">
+
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <span class="text-white">
+                            Hello, @User.Identity.Name
+                        </span>
+
+                        <form action="/Account/Logout" method="post">
+                            @Html.AntiForgeryToken()
+
+                            <button type="submit" class="btn btn-purple">
+                                Log Out
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a href="/Account/Login" class="btn-login">
+                            Log In
+                        </a>
+
+                        <a href="/Account/Register" class="btn-register">
+                            Sign Up
+                        </a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        @if (ViewContext.RouteData.Values["controller"]?.ToString() == "Account")
+        {
+            @RenderBody()
+        }
+        else
+        {
+            <div class="container normal-page">
+                @RenderBody()
+            </div>
+        }
+    </main>
+
+    <footer>
+        © 2026 Task9. All rights reserved.
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

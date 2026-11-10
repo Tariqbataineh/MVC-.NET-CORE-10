@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using University_Cafeteria_Management_System_.Models;
+using Task8.Models;
 
-namespace University_Cafeteria_Management_System_.Controllers
+namespace Task8.Controllers
 {
     public class HomeController : Controller
     {
